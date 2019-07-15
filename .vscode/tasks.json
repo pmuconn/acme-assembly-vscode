@@ -1,0 +1,67 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "options": {
+        "cwd": "${fileDirname}"
+    },
+    "tasks": [
+        {
+            "label": "build -> C64 -> VICE",
+            "type": "shell",
+            "osx": {
+                "command": "${workspaceFolder}/bin/mac/acme -f cbm -l ${workspaceFolder}/build/labels -o ${workspaceFolder}/build/${fileBasenameNoExtension}.prg ${file} && ~/Documents/C64/vice3.1osx/x64.app/Contents/MacOS/x64 -moncommands ${workspaceFolder}/build/labels ${workspaceFolder}/build/${fileBasenameNoExtension}.prg 2> /dev/null",
+            },
+            "windows": {
+                "command": "bin\\win\\acme -f cbm -l build/labels -o build/${fileBasenameNoExtension}.prg code/${fileBasenameNoExtension}.asm && C:/tools/vice/x64.exe -moncommands build/labels build/${fileBasenameNoExtension}.prg"
+            },
+            "linux": {
+                "command": "bin/linux/acme -f cbm -l build/labels -o build/${fileBasenameNoExtension}.prg code/${fileBasenameNoExtension}.asm && x64 -moncommands build/labels build/${fileBasenameNoExtension}.prg 2> /dev/null"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "clear": true
+            },
+            "problemMatcher": {
+                "owner": "acme",
+                "fileLocation": ["relative", "${workspaceFolder}"],
+                "pattern": {
+                    "regexp": "^(Error - File\\s+(.*), line (\\d+) (\\(Zone .*\\))?:\\s+(.*))$",
+                    "file": 2,
+                    "location": 3,
+                    "message": 1
+                }
+            }
+        },
+        {
+            "label": "build -> C64 -> Pucrunch -> VICE",
+            "type": "shell",
+            "osx": {
+                "command": "${workspaceFolder}/bin/mac/acme -f cbm -l ${workspaceFolder}/build/labels -o ${workspaceFolder}/build/${fileBasenameNoExtension}.prg ${file} && ${workspaceFolder}/bin/mac/pucrunch ${workspaceFolder}/build/${fileBasenameNoExtension}.prg ${workspaceFolder}/build/${fileBasenameNoExtension}.prg && ~/Documents/C64/vice3.1osx/x64.app/Contents/MacOS/x64 -moncommands ${workspaceFolder}/build/labels ${workspaceFolder}/build/${fileBasenameNoExtension}.prg 2> /dev/null",
+            },
+            "windows": {
+                "command": "bin\\win\\acme -f cbm -l build/labels -o build/${fileBasenameNoExtension}.prg code/${fileBasenameNoExtension}.asm && bin\\win\\pucrunch build/${fileBasenameNoExtension}.prg build/${fileBasenameNoExtension}.prg && C:/tools/vice/x64.exe -moncommands build/labels build/${fileBasenameNoExtension}.prg",
+            },
+            "linux": {
+                "command": "bin/linux/acme -f cbm -l build/labels -o build/${fileBasenameNoExtension}.prg code/${fileBasenameNoExtension}.asm && bin/linux/pucrunch build/${fileBasenameNoExtension}.prg build/${fileBasenameNoExtension}.prg && x64 -moncommands build/labels build/${fileBasenameNoExtension}.prg 2> /dev/null"
+            },
+            "group": "build",
+            "presentation": {
+                "clear": true
+            },
+            "problemMatcher": {
+                "owner": "acme",
+                "fileLocation": ["relative", "${workspaceFolder}"],
+                "pattern": {
+                    "regexp": "^(Error - File\\s+(.*), line (\\d+) (\\(Zone .*\\))?:\\s+(.*))$",
+                    "file": 2,
+                    "location": 3,
+                    "message": 1
+                }
+            }
+        }
+    ]
+}
