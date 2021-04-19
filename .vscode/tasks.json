@@ -5,6 +5,16 @@
     "options": {
         "cwd": "${fileDirname}"
     },
+    "windows": {
+        "options": {
+            "shell": {
+                "executable": "cmd.exe",
+                "args": [
+                    "/d", "/c"
+                ]
+            }
+        }
+    },        
     "tasks": [
         {
             "label": "build -> C64 -> VICE",
@@ -13,7 +23,7 @@
                 "command": "${workspaceFolder}/bin/mac/acme -f cbm -l ${workspaceFolder}/build/labels -o ${workspaceFolder}/build/${fileBasenameNoExtension}.prg ${file} && ~/Documents/C64/vice3.1osx/x64.app/Contents/MacOS/x64 -moncommands ${workspaceFolder}/build/labels ${workspaceFolder}/build/${fileBasenameNoExtension}.prg 2> /dev/null",
             },
             "windows": {
-                "command": "${workspaceFolder}\\bin\\win\\acme -f cbm -l ${workspaceFolder}\\build\\labels -o ${workspaceFolder}\\build\\${fileBasenameNoExtension}.prg ${workspaceFolder}\\code\\${fileBasenameNoExtension}.asm && C:\\paulsoftware\\WinVICE-3.1-x64\\x64.exe -moncommands ${workspaceFolder}\\build\\labels ${workspaceFolder}\\build\\${fileBasenameNoExtension}.prg"
+                "command": "${workspaceFolder}\\bin\\win\\acme -f cbm -l ${workspaceFolder}\\build\\labels -o ${workspaceFolder}\\build\\${fileBasenameNoExtension}.prg ${file} && C:\\paul\\software\\GTK3VICE-3.5-win64\\bin\\x64sc.exe -moncommands ${workspaceFolder}\\build\\labels ${workspaceFolder}\\build\\${fileBasenameNoExtension}.prg"
             },
             "linux": {
                 "command": "bin/linux/acme -f cbm -l build/labels -o build/${fileBasenameNoExtension}.prg code/${fileBasenameNoExtension}.asm && x64 -moncommands build/labels build/${fileBasenameNoExtension}.prg 2> /dev/null"
@@ -43,7 +53,7 @@
                 "command": "${workspaceFolder}/bin/mac/acme -f cbm -l ${workspaceFolder}/build/labels -o ${workspaceFolder}/build/${fileBasenameNoExtension}.prg ${file} && ${workspaceFolder}/bin/mac/pucrunch ${workspaceFolder}/build/${fileBasenameNoExtension}.prg ${workspaceFolder}/build/${fileBasenameNoExtension}.prg && ~/Documents/C64/vice3.1osx/x64.app/Contents/MacOS/x64 -moncommands ${workspaceFolder}/build/labels ${workspaceFolder}/build/${fileBasenameNoExtension}.prg 2> /dev/null",
             },
             "windows": {
-                "command": "${workspaceFolder}\\bin\\win\\acme -f cbm -l ${workspaceFolder}/build/labels -o ${workspaceFolder}/build/${fileBasenameNoExtension}.prg ${workspaceFolder}/code/${fileBasenameNoExtension}.asm && ${workspaceFolder}\\bin\\win\\pucrunch ${workspaceFolder}/build/${fileBasenameNoExtension}.prg ${workspaceFolder}/build/${fileBasenameNoExtension}.prg && C:/paulsoftware/WinVICE-3.1-x64/x64.exe -moncommands ${workspaceFolder}/build/labels ${workspaceFolder}/build/${fileBasenameNoExtension}.prg",
+                "command": "${workspaceFolder}\\bin\\win\\acme -f cbm -l ${workspaceFolder}/build/labels -o ${workspaceFolder}/build/${fileBasenameNoExtension}.prg ${file} && ${workspaceFolder}\\bin\\win\\pucrunch ${workspaceFolder}/build/${fileBasenameNoExtension}.prg ${workspaceFolder}/build/${fileBasenameNoExtension}.prg && C:\\paul\\software\\GTK3VICE-3.5-win64\\bin\\x64sc.exe -moncommands ${workspaceFolder}/build/labels ${workspaceFolder}/build/${fileBasenameNoExtension}.prg",
             },
             "linux": {
                 "command": "bin/linux/acme -f cbm -l build/labels -o build/${fileBasenameNoExtension}.prg code/${fileBasenameNoExtension}.asm && bin/linux/pucrunch build/${fileBasenameNoExtension}.prg build/${fileBasenameNoExtension}.prg && x64 -moncommands build/labels build/${fileBasenameNoExtension}.prg 2> /dev/null"
